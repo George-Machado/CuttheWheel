@@ -10,6 +10,8 @@ public class ConstructionScene : MonoBehaviour
   public GameObject Car;
   public Vector3 carStartScale = new Vector3(0.3f, 0.3f, 1f);
   public Vector3 carEndScale = new Vector3(1f, 1f, 1f);
+  public Vector3 carStartPos = new Vector3(0.3f, 0.3f, 1f);
+  public Vector3 carEndPos = new Vector3(1f, 1f, 1f);
   public float carScaleDuration = 1f;
   public GameObject StopSign;
   private BoxCollider2D signBoxCollider;
@@ -36,9 +38,10 @@ public class ConstructionScene : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    float delta = Mathf.Clamp((DateTime.Now - sceneStartTime).Milliseconds, 0f, carScaleDuration * 1000) / (carScaleDuration * 1000);
+    float delta = Mathf.Clamp((float)(DateTime.Now - sceneStartTime).TotalMilliseconds, 0f, carScaleDuration * 1000) / (carScaleDuration * 1000);
     Debug.Log(delta);
     Car.transform.localScale = Vector3.Lerp(carStartScale, carEndScale, delta);
+    Car.transform.position = Vector3.Lerp(carStartPos, carEndPos, delta);
   }
 
   void Swiped(LeanFinger finger)
